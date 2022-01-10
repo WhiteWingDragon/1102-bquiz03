@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 if(!empty($_POST)){
     if($_POST['acc']=='admin' && $_POST['pw']=='1234'){
         $_SESSION['login']='admin';
