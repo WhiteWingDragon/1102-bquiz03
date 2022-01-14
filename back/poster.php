@@ -11,8 +11,24 @@
         <div style="overflow:auto;height:200px">
             <?php
             $rows=$Poster->all(" ORDER by `rank`");
-            foreach($rows as $row){
+            foreach($rows as $key => $row){
                 $checked=($row['sh']==1)?"checked":"";
+                if($key==0){
+                    $up=$row['id'] . "-" . $row['id'];
+                    $down=$row['id'] . "-" . $rows[$key+1]['id'];
+                }
+
+                if($key==(count($rows)-1)){
+                    $down=$row['id'] . "-" . $row['id'];
+                    $up=$row['id'] . "-" . $rows[$key-1]['id'];
+                }
+
+                if($key>0 && $key<(count($rows)-1)){
+                    $up=$row['id'] . "-" . $rows[$key-1]['id'];
+                    $down=$row['id'] . "-" . $rows[$key+1]['id'];
+                }
+
+
             ?>
             <div style="display:flex" class="ct">
                 <div style="width:25%;">
@@ -20,7 +36,10 @@
                 </div>
                 <div style="width:25%;">
                     <input type="text" name="name[]" value="<?=$row['name'];?>"></div>
-                <div style="width:25%;"><?=$row['rank'];?></div>
+                <div style="width:25%;">
+                    <input type="button" value="往上" data-sw="<?=$up;?>">
+                    <input type="button" value="往下" data-sw="<?=$down;?>">
+                </div>
                 <div style="width:25%;">
                     <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=$checked;?>>顯示
                     <input type="checkbox" name="del[]" value="<?=$row['id'];?>">刪除
