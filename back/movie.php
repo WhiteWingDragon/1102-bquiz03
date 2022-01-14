@@ -5,7 +5,20 @@
 $mos=$Movie->all(" ORDER BY rank");
 
 foreach ($mos as $key => $movie) {
+    if($key==0){
+        $up=$movie['id'] . "-" . $movie['id'];
+        $down=$movie['id'] . "-" . $mos[$key+1]['id'];
+    }
 
+    if($key==(count($mos)-1)){
+        $down=$movie['id'] . "-" . $movie['id'];
+        $up=$movie['id'] . "-" . $mos[$key-1]['id'];
+    }
+
+    if($key>0 && $key<(count($mos)-1)){
+        $up=$movie['id'] . "-" . $mos[$key-1]['id'];
+        $down=$movie['id'] . "-" . $mos[$key+1]['id'];
+    }
 ?>
 
 <div style="display:flex;width:100%;">
@@ -26,8 +39,8 @@ foreach ($mos as $key => $movie) {
         <button class="show" data-id="<?=$movie['id'];?>">
             <?=($movie['sh']==1)?"顯示":"隱藏";?>
         </button>
-        <button>往上</button>
-        <button>往下</button>
+        <button class="sw" data-sw="<?=$up;?>">往上</button>
+        <button class="sw" data-sw="<?=$down?>">往下</button>
         <button onclick="location.href='?do=edit_movie&id=<?=$movie['id'];?>'">編輯電影</button>
         <button onclick="del('movie',<?=$movie['id'];?>)">刪除電影</button>
 
@@ -45,6 +58,15 @@ foreach ($mos as $key => $movie) {
 </div>
 
 <script>
+
+$('.sw').on('click',function(){
+        let id=$(this).data("sw").split("-");
+        $.post("api/sw.php",{id,table:"movie"},()=>{
+            location.reload();
+        })
+    })
+
+
 $(".show").on("click",function(e){
     let id=$(e.target).data("id");
     $.post("api/show.php",{id},()=>{
