@@ -37,8 +37,8 @@
                 <div style="width:25%;">
                     <input type="text" name="name[]" value="<?=$row['name'];?>"></div>
                 <div style="width:25%;">
-                    <input type="button" value="往上" data-sw="<?=$up;?>">
-                    <input type="button" value="往下" data-sw="<?=$down;?>">
+                    <input type="button" class="sw" value="往上" data-sw="<?=$up;?>">
+                    <input type="button" class="sw" value="往下" data-sw="<?=$down;?>">
                 </div>
                 <div style="width:25%;">
                     <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=$checked;?>>顯示
@@ -82,3 +82,13 @@
 </form>
 
 </div>
+
+<script>
+    $('.sw').on('click',function(){
+        let id=$(this).data("sw").split("-");
+        $.post("api/sw.php",{id,table:"poster"},()=>{
+            location.reload();
+        })
+    })
+
+</script>
