@@ -20,7 +20,9 @@
                 </div>
                 <div style="width:25%;">
                     <input type="text" name="name[]" value="<?=$row['name'];?>"></div>
-                <div style="width:25%;"><?=$row['rank'];?></div>
+                <div style="width:25%;">
+                    <input type="number" name="rank[]" value="<?=$row['rank'];?>">
+                </div>
                 <div style="width:25%;">
                     <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=$checked;?>>顯示
                     <input type="checkbox" name="del[]" value="<?=$row['id'];?>">刪除
