@@ -130,7 +130,7 @@ function ani(n){
     break;
     case 2:
     //縮放
-      now.hide(1000,function(){
+    now.hide(1000,function(){
       next.show(1000);
     });
     break;
@@ -159,4 +159,19 @@ $(".left,.right").on("click",function(){
     $(".icon").animate({right:p*80},500)
 })
 
+$(".icon").on("click",function(){
+  clearInterval(slides)
+  let idx=$(this).index()
+  ani(idx)
+
+  i=idx
+
+  slides=setInterval(() => {
+    i++;
+    if(i>all-1){
+      i=0;
+    }
+    ani(i);
+}, 2500);
+})
 </script>    
