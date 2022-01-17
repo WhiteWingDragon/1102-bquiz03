@@ -130,15 +130,22 @@ function ani(n){
     break;
     case 2:
     //縮放
-    now.hide(1000,function(){
-      next.show(1000);
+    now.animate({width:0,height:0,top:130,left:105},1000,function(){
+      now.hide();
+      next.show();
+      next.css({width:0,height:0,top:130,left:105})
+      next.animate({width:210,height:260,top:0,left:0},1000,function(){});
     });
     break;
     case 3:
       //滑入滑出
-      now.slideUp(1000,function(){
-        next.slideDown(1000);
+      now.animate({left:-210},1000,function(){
+        now.hide();
+        now.css({width:210,height:260,top:0,left:0})
       });
+      next.show();
+      next.css({width:210,height:260,top:0,left:210})
+      next.animate({left:0},1000);
     break;
   }
 }
