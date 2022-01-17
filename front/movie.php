@@ -33,19 +33,22 @@
             foreach($rows as $key => $row){
         ?>
             <div>
-                <div>片名:<?=$row['name'];?></div>
+                <div class='ct' style="font-size:22px"><?=$row['name'];?></div>
                 <div style="display:flex">
                     <div>
-                        <img src="img/sdfsafd.png" style="width:60px">
+                        <img src="img/<?=$row['poster'];?>" style="width:60px">
                     </div>
                     <div>
-                        <div>分級:</div>
-                        <div>上映日期:</div>
+                        <div>分級:
+                            <img src="icon/<?=$row['level'];?>.png" style="width:25px">
+                            <?=$Movie->level($row['level']);?>
+                        </div>
+                        <div>上映日期:<br><?=$row['ondate'];?></div>
                     </div>
                 </div>
                 <div>
-                    <button>電影簡介</button>
-                    <button>線上訂票</button>
+                    <button onclick="location.href='?do=intro&id=<?=$row['id'];?>'">電影簡介</button>
+                    <button onclick="location.href='?do=order&id=<?=$row['id'];?>'">線上訂票</button>
                 </div>
             </div>
         <?php
@@ -75,10 +78,7 @@
                 echo " > ";
                 echo " </a>";
             }
-                
-         
             ?>
-
         </div>
     </div>
 </div>
