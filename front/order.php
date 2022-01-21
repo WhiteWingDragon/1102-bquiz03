@@ -49,6 +49,9 @@ let id=(new URL(location)).searchParams.get('id');
 getMovies(id)
 
 $("#movie").on("change",()=>{getDays()})
+$("#date").on("change",()=>{getSessions()})
+
+
 
 function booking(){
     $("#order,#booking").toggle()
