@@ -19,6 +19,7 @@
     .sec select{
         width:100%;
     }
+
 </style>
 <div id="order">
 <div class="row">
