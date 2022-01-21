@@ -41,9 +41,23 @@
 </div>
 </div>
 <script>
+let id=(new URL(location)).searchParams.get('id');
+getMovies(id)
 
-$.get("api/get_movies.php",(movies)=>{
-    $("#movie").html(movies)
-})
+$("#movie").on("change",()=>{getDays()})
 
+
+function getMovies(id){
+    $.get("api/get_movies.php",{id},(movies)=>{
+        $("#movie").html(movies)
+        getDays()
+    })
+}
+
+function getDays(){
+    let id=$("#movie").val();
+    $.get("api/get_days.php",{id},(days)=>{
+        $("#date").html(days)
+    })
+}
 </script>
